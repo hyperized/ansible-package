@@ -1,4 +1,4 @@
-fdmg.package
+hyperized.package
 =========
 
 Simple Ubuntu APT package wrapper
