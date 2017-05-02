@@ -1,0 +1,12 @@
+---
+- name: ensure cache_valid_time is set
+  set_fact:
+    package_cache_valid_time: "{{ apt_cache_valid_time }}"
+  when: apt_cache_valid_time is defined
+
+- name: install required packages
+  apt:
+    name: "{{ package_name }}"
+    state: "{{ package_state }}"
+    update_cache: yes
+    cache_valid_time: "{{ package_cache_valid_time }}"
