@@ -1,5 +1,16 @@
 ---
-- hosts: all
+- hosts: localhost
   become: yes
   roles:
-    - { role: hyperized.package, package_name: htop }
+    - role: package
+      package_name: htop
+
+  tasks:
+    - command: dpkg -l htop
+      register: dpkg
+      changed_when: False
+
+    - assert:
+        that:
+          - '"no packages found matching" not in dpkg.stdout'
+          - '"ii" in dpkg.stdout'
